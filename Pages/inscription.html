@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription - Ymmo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="auth.js" defer></script>
+</head>
+<body data-page="register" class="auth-page">
+  <main class="auth-layout">
+    <section class="auth-visual">
+      <a class="brand brand-inline" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <p class="section-kicker">Nouveau compte</p>
+      <h1>Creer un acces propre et reutilisable pour la soutenance.</h1>
+      <p class="section-copy">
+        Le formulaire ajoute un utilisateur en base SQLite, lui attribue un role
+        et stocke un mot de passe hache cote Python.
+      </p>
+
+      <ul class="feature-list feature-list-plain">
+        <li>validation des champs</li>
+        <li>hachage PBKDF2 SHA-256</li>
+        <li>liaison utilisateur / role</li>
+        <li>session locale dans le navigateur</li>
+      </ul>
+    </section>
+
+    <section class="auth-panel">
+      <p><a class="inline-link" href="accueil.html">Retour a l'accueil</a></p>
+      <h2>Inscription</h2>
+      <p class="helper helper-block">Creation de compte en quelques champs.</p>
+
+      <form id="register-form" class="stack-form" aria-label="Formulaire d'inscription">
+        <div class="field-row">
+          <div class="field">
+            <label for="register_first_name">Prenom</label>
+            <input id="register_first_name" name="first_name" type="text" placeholder="Camille" required>
+          </div>
+          <div class="field">
+            <label for="register_last_name">Nom</label>
+            <input id="register_last_name" name="last_name" type="text" placeholder="Robert" required>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="register_email">Email</label>
+            <input id="register_email" name="email" type="email" placeholder="camille.robert@email.fr" required>
+          </div>
+          <div class="field">
+            <label for="register_phone">Telephone</label>
+            <input id="register_phone" name="phone" type="tel" placeholder="06 11 22 33 44">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="register_role">Profil</label>
+          <select id="register_role" name="role">
+            <option value="Client">Client</option>
+            <option value="Agent">Agent</option>
+            <option value="Manager">Manager</option>
+            <option value="Admin IT">Admin IT</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="register_password">Mot de passe</label>
+          <input id="register_password" name="password" type="password" placeholder="Minimum 12 caracteres" required>
+        </div>
+
+        <div class="field">
+          <label for="register_confirm_password">Confirmation</label>
+          <input id="register_confirm_password" name="confirm_password" type="password" placeholder="Retapez le mot de passe" required>
+        </div>
+
+        <button class="btn primary" type="submit">Creer le compte</button>
+        <p id="register-feedback" class="helper helper-block" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="helper helper-block">Deja inscrit ? <a class="inline-link" href="connexion.html">Se connecter</a></p>
+    </section>
+  </main>
+</body>
+</html>

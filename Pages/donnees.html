@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ymmo - Analyse des données</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="donnees.js" defer></script>
+</head>
+<body data-page="donnees">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="catalogue.html">Catalogue</a>
+        <a href="donnees.html">Analyse</a>
+        <a href="infra.html">Infra</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="client.html">Mon espace</a>
+        <a id="login-link" class="btn soft" href="connexion.html">Connexion</a>
+        <a id="register-link" class="btn primary" href="inscription.html">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="band">
+      <div class="container insights-grid">
+        <div>
+          <p class="section-kicker">Analyse Python + SQLite</p>
+          <h2>Comparaison des types de biens</h2>
+          <p class="section-copy">
+            Les prix moyens, les delais de vente et le score d'interet acheteur
+            permettent d'appuyer les recommandations commerciales et les previsions.
+          </p>
+          <div id="type-chart" class="bar-list" aria-live="polite"></div>
+        </div>
+
+        <div>
+          <p class="section-kicker">Historique recent</p>
+          <h2>Dernieres ventes de reference</h2>
+          <div id="sales-list" class="sales-list" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Prototype B2 INFRA &amp; DEV en html, javascript, python et sqlite.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, diffusion nationale, pilotage data et infra securisee.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ymmo - Formulaire de Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="contact.js" defer></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="catalogue.html">Catalogue</a>
+        <a href="donnees.html">Analyse</a>
+        <a href="infra.html">Infra</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="client.html">Mon espace</a>
+        <a id="login-link" class="btn soft" href="connexion.html">Connexion</a>
+        <a id="register-link" class="btn primary" href="inscription.html">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="band">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <p class="section-kicker">Relation client</p>
+          <h2>Creer une demande exploitable par l'agence</h2>
+          <p class="section-copy">
+            Depuis une selection de bien, le formulaire prepare un lead exploitable
+            en agence. C'est un bon socle pour la suite: CRM, suivi de dossiers,
+            favoris et espace agent.
+          </p>
+
+          <div class="note-block">
+            <strong>Ce MVP met deja en valeur :</strong>
+            <ul class="feature-list">
+              <li>une architecture backend Python orientee services</li>
+              <li>des interactions client-serveur simples et testables</li>
+              <li>une base SQLite exploitable pour la data</li>
+              <li>une interface responsive orientee usage</li>
+            </ul>
+          </div>
+
+          <div class="cta-section">
+            <p>Vous n'avez pas encore selectionne de bien ?</p>
+            <a href="catalogue.html" class="btn soft">Voir le catalogue</a>
+          </div>
+        </div>
+
+        <form id="contact-form" class="form-surface" aria-label="Demande de contact">
+          <input type="hidden" name="property_id" value="">
+
+          <div class="selected-inline">
+            <span class="selected-inline-label">Bien selectionne</span>
+            <p id="selected-property" class="helper">Aucun bien selectionne.</p>
+          </div>
+
+          <div class="field">
+            <label for="full_name">Nom complet</label>
+            <input id="full_name" name="full_name" type="text" placeholder="Camille Robert" required>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="contact_email">Email</label>
+              <input id="contact_email" name="email" type="email" placeholder="camille.robert@email.fr" required>
+            </div>
+            <div class="field">
+              <label for="contact_phone">Telephone</label>
+              <input id="contact_phone" name="phone" type="tel" placeholder="06 11 22 33 44">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="preferred_contact">Mode de contact prefere</label>
+            <select id="preferred_contact" name="preferred_contact">
+              <option value="">Choisir</option>
+              <option value="Telephone">Telephone</option>
+              <option value="Email">Email</option>
+              <option value="Visio">Visio</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Je souhaite organiser une visite et connaitre les delais."></textarea>
+          </div>
+
+          <button class="btn primary" type="submit">Envoyer la demande</button>
+          <p id="contact-feedback" class="helper helper-block" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Prototype B2 INFRA &amp; DEV en html, javascript, python et sqlite.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, diffusion nationale, pilotage data et infra securisee.</p>
+    </div>
+  </footer>
+</body>
+</html>

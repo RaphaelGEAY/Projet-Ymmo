@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ymmo - Catalogue</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="catalogue.js" defer></script>
+</head>
+<body data-page="catalogue">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="catalogue.html">Catalogue</a>
+        <a href="donnees.html">Analyse</a>
+        <a href="infra.html">Infra</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="client.html">Mon espace</a>
+        <a id="login-link" class="btn soft" href="connexion.html">Connexion</a>
+        <a id="register-link" class="btn primary" href="inscription.html">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="workspace-band">
+      <div class="container workspace-grid">
+        <aside class="tool-surface search-surface">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p class="section-kicker">Recherche</p>
+              <h2>Filtrer le catalogue</h2>
+            </div>
+          </div>
+
+          <form id="search-form" class="stack-form" aria-label="Recherche de biens">
+            <div class="field">
+              <label for="city">Ville</label>
+              <input id="city" name="city" type="text" placeholder="Rennes, Lyon, Aix-en-Provence">
+            </div>
+
+            <div class="field">
+              <label for="type">Type de bien</label>
+              <select id="type" name="type">
+                <option value="">Tous</option>
+                <option value="Appartement">Appartement</option>
+                <option value="Maison">Maison</option>
+                <option value="Local professionnel">Local professionnel</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="max_price">Budget maximum</label>
+              <input id="max_price" name="max_price" type="number" min="0" step="1000" placeholder="650000">
+            </div>
+
+            <div class="field">
+              <label for="status">Statut</label>
+              <select id="status" name="status">
+                <option value="">Tous</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Sous offre">Sous offre</option>
+              </select>
+            </div>
+
+            <div class="button-row">
+              <button class="btn primary" type="submit">Appliquer</button>
+              <button id="reset-filters" class="btn ghost" type="button">Effacer</button>
+            </div>
+          </form>
+
+          <div class="quick-picks">
+            <p class="helper-title">Acces rapide</p>
+            <div class="chip-row">
+              <button class="chip-button" type="button" data-filter-city="Rennes">Rennes</button>
+              <button class="chip-button" type="button" data-filter-city="Lyon">Lyon</button>
+              <button class="chip-button" type="button" data-filter-type="Maison">Maisons</button>
+              <button class="chip-button" type="button" data-filter-type="Appartement">Appartements</button>
+              <button class="chip-button" type="button" data-filter-status="Disponible">Disponibles</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="results-column" aria-labelledby="results-title">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Catalogue synchronise</p>
+              <h2 id="results-title">Biens recommands</h2>
+            </div>
+            <div class="results-actions">
+              <p id="results-counter" class="helper helper-inline"></p>
+              <button id="refresh-button" class="btn soft" type="button">Actualiser</button>
+            </div>
+          </div>
+
+          <p id="offers-state" class="helper" aria-live="polite">Chargement des offres...</p>
+          <div id="offers-grid" class="property-grid" aria-live="polite"></div>
+        </section>
+
+        <aside class="tool-surface detail-surface">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p class="section-kicker">Selection</p>
+              <h2>Fiche rapide</h2>
+            </div>
+          </div>
+
+          <div id="selected-visual" class="selected-visual selected-visual--default">
+            <span id="selected-type-badge" class="visual-badge">Bien</span>
+            <strong id="selected-title">Choisissez un bien</strong>
+            <p id="selected-location">La fiche detaillee apparaitra ici.</p>
+          </div>
+
+          <div class="selected-content">
+            <div class="selected-row">
+              <span>Prix</span>
+              <strong id="selected-price">Prix sur demande</strong>
+            </div>
+            <div class="selected-row">
+              <span>Agence</span>
+              <strong id="selected-agency">Ymmo</strong>
+            </div>
+            <div class="selected-row">
+              <span>Etat</span>
+              <strong id="selected-status">Non selectionne</strong>
+            </div>
+
+            <p id="selected-description" class="helper helper-block">
+              Selectionnez un bien depuis la liste pour afficher sa synthese, ses indicateurs
+              et preparer une demande de visite.
+            </p>
+
+            <div id="selected-metrics" class="metric-chip-list"></div>
+
+            <div class="button-row">
+              <button id="selected-contact-button" class="btn primary" type="button">Preparer une demande</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Prototype B2 INFRA &amp; DEV en html, javascript, python et sqlite.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, diffusion nationale, pilotage data et infra securisee.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion - Ymmo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="auth.js" defer></script>
+</head>
+<body data-page="login" class="auth-page">
+  <main class="auth-layout">
+    <section class="auth-visual">
+      <a class="brand brand-inline" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <p class="section-kicker">Acces securise</p>
+      <h1>Reconnecte-toi en quelques secondes.</h1>
+      <p class="section-copy">
+        Les profils client, agent, manager et admin utilisent la meme base de comptes
+        et la meme API Python.
+      </p>
+
+      <div class="demo-list">
+        <div class="demo-row">
+          <strong>Agent</strong>
+          <span>alex.durand@ymmo.fr</span>
+          <code>YmmoAgent2026!</code>
+        </div>
+        <div class="demo-row">
+          <strong>Manager</strong>
+          <span>lea.martin@ymmo.fr</span>
+          <code>YmmoManager2026!</code>
+        </div>
+        <div class="demo-row">
+          <strong>Client</strong>
+          <span>client.demo@ymmo.fr</span>
+          <code>YmmoClient2026!</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-panel">
+      <p><a class="inline-link" href="accueil.html">Retour a l'accueil</a></p>
+      <h2>Connexion</h2>
+      <p class="helper helper-block">Authentification locale via l'API python.</p>
+
+      <form id="login-form" class="stack-form" aria-label="Formulaire de connexion">
+        <div class="field">
+          <label for="login_email">Email</label>
+          <input id="login_email" name="email" type="email" placeholder="prenom.nom@ymmo.fr" required>
+        </div>
+
+        <div class="field">
+          <label for="login_password">Mot de passe</label>
+          <input id="login_password" name="password" type="password" placeholder="Votre mot de passe" required>
+        </div>
+
+        <div class="field">
+          <label for="login_role">Profil</label>
+          <select id="login_role" name="role">
+            <option value="Client">Client</option>
+            <option value="Agent">Agent</option>
+            <option value="Manager">Manager</option>
+            <option value="Admin IT">Admin IT</option>
+          </select>
+        </div>
+
+        <button class="btn primary" type="submit">Se connecter</button>
+        <p id="login-feedback" class="helper helper-block" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="helper helper-block">Pas encore de compte ? <a class="inline-link" href="inscription.html">Creer un acces</a></p>
+    </section>
+  </main>
+</body>
+</html>

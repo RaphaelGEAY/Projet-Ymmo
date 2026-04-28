@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ymmo - Plateforme immobiliere</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="accueil.js" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="catalogue.html">Catalogue</a>
+        <a href="donnees.html">Analyse</a>
+        <a href="infra.html">Infra</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="client.html">Mon espace</a>
+        <a id="login-link" class="btn soft" href="connexion.html">Connexion</a>
+        <a id="register-link" class="btn primary" href="inscription.html">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="intro-band">
+      <div class="container intro-grid">
+        <div class="intro-copy">
+          <p class="section-kicker">Ymmo France</p>
+          <h1>Un poste de pilotage clair pour vendre, acheter et analyser plus vite.</h1>
+          <p class="section-copy intro-copy-text">
+            Meme catalogue, memes indicateurs et meme suivi client pour le siege
+            d'Aix-en-Provence et les 12 agences reliees via une architecture securisee.
+          </p>
+
+          <div class="intro-actions">
+            <a class="btn primary" href="catalogue.html">Explorer les biens</a>
+            <a class="btn ghost" href="donnees.html">Voir les tendances</a>
+          </div>
+
+          <div class="intro-strip" aria-label="Indicateurs rapides">
+            <div class="intro-stat">
+              <strong id="agency-count">0</strong>
+              <span>agences connectees</span>
+            </div>
+            <div class="intro-stat">
+              <strong id="property-count">0</strong>
+              <span>biens actifs</span>
+            </div>
+            <div class="intro-stat">
+              <strong id="workstation-count">0</strong>
+              <span>postes relies</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Vue d'ensemble</p>
+              <h2>Marche du moment</h2>
+            </div>
+            <span class="status-dot">live</span>
+          </div>
+
+          <div id="stats-grid" class="stats-grid"></div>
+
+          <div class="pulse-box">
+            <div>
+              <p class="pulse-label">Ville prioritaire</p>
+              <strong id="hotspot-city">Chargement...</strong>
+            </div>
+            <p id="hotspot-summary" class="helper helper-block">Chargement de l'analyse...</p>
+          </div>
+
+          <div id="network-summary" class="mini-stack"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Prototype B2 INFRA &amp; DEV en html, javascript, python et sqlite.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, diffusion nationale, pilotage data et infra securisee.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ymmo - Infrastructure</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="infra.js" defer></script>
+</head>
+<body data-page="infra">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="catalogue.html">Catalogue</a>
+        <a href="donnees.html">Analyse</a>
+        <a href="infra.html">Infra</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="client.html">Mon espace</a>
+        <a id="login-link" class="btn soft" href="connexion.html">Connexion</a>
+        <a id="register-link" class="btn primary" href="inscription.html">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="band band-alt">
+      <div class="container infra-layout">
+        <div class="band-head">
+          <div>
+            <p class="section-kicker">Infrastructure et droits</p>
+            <h2>Siege + 12 agences, une architecture lisible</h2>
+            <p class="section-copy">
+              VPN IPSec, Active Directory, GPO, DNS/DHCP, sauvegardes et supervision
+              pour tenir le brief infra avec une vision claire du reseau.
+            </p>
+          </div>
+          <div class="chip-row">
+            <span class="info-chip">VPN IPSec</span>
+            <span class="info-chip">AD / GPO</span>
+            <span class="info-chip">DNS / DHCP</span>
+            <span class="info-chip">Sauvegardes</span>
+          </div>
+        </div>
+
+        <div id="network-grid" class="network-grid" aria-live="polite"></div>
+
+        <div class="matrix-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Consulter</th>
+                <th>Creer annonces</th>
+                <th>Valider vente</th>
+                <th>Acces data</th>
+                <th>Administrer infra</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Client</td>
+                <td>Oui</td>
+                <td>Non</td>
+                <td>Non</td>
+                <td>Non</td>
+                <td>Non</td>
+              </tr>
+              <tr>
+                <td>Agent</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Non</td>
+                <td>Oui</td>
+                <td>Non</td>
+              </tr>
+              <tr>
+                <td>Manager</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Non</td>
+              </tr>
+              <tr>
+                <td>Admin IT</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Oui</td>
+                <td>Oui</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Prototype B2 INFRA &amp; DEV en html, javascript, python et sqlite.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, diffusion nationale, pilotage data et infra securisee.</p>
+    </div>
+  </footer>
+</body>
+</html>

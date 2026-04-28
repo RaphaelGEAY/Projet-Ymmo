@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace agent - Ymmo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="roles.js" defer></script>
+</head>
+<body data-page="role" data-role-view="Agent">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="accueil.html">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>espace agent</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation espace agent">
+        <a href="#overview" id="nav-overview-label">Apercu</a>
+        <a href="#focus" id="nav-focus-label">Leads</a>
+        <a href="#performance" id="nav-detail-label">Mandats</a>
+        <a href="#actions" id="nav-actions-label">Actions</a>
+      </nav>
+
+      <div class="session-actions">
+        <a class="btn ghost" href="accueil.html">Catalogue public</a>
+        <span id="session-text" class="session-text">Agent</span>
+        <a id="logout-link" class="btn primary" href="deconnexion.html">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="role-shell">
+    <section class="role-hero-band" id="overview">
+      <div class="container role-hero-grid">
+        <div class="role-hero-copy">
+          <p id="role-kicker" class="section-kicker">Espace agent</p>
+          <h1 id="role-title">Chargement de l'espace agent...</h1>
+          <p id="role-description" class="section-copy"></p>
+        </div>
+
+        <div class="role-hero-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Acces</p>
+              <h2 id="role-badge">Agent</h2>
+            </div>
+            <span class="status-dot">commercial</span>
+          </div>
+          <div id="role-kpis" class="role-summary-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="role-workspace" id="focus">
+      <div class="container role-workspace-grid">
+        <section class="dashboard-panel dashboard-panel-large">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p id="focus-kicker" class="section-kicker"></p>
+              <h2 id="focus-title"></h2>
+              <p id="focus-description" class="helper helper-block"></p>
+            </div>
+          </div>
+          <div id="focus-content" class="request-list request-list-large"></div>
+        </section>
+
+        <aside class="dashboard-panel">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p id="side-kicker" class="section-kicker"></p>
+              <h2 id="side-title"></h2>
+              <p id="side-description" class="helper helper-block"></p>
+            </div>
+          </div>
+          <div id="side-content" class="dashboard-card-grid dashboard-card-grid-tight"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="band" id="performance">
+      <div class="container role-bottom-grid">
+        <section class="dashboard-panel">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p id="bottom-left-kicker" class="section-kicker"></p>
+              <h2 id="bottom-left-title"></h2>
+              <p id="bottom-left-description" class="helper helper-block"></p>
+            </div>
+          </div>
+          <div id="bottom-left-content" class="timeline-list"></div>
+        </section>
+
+        <section class="dashboard-panel" id="actions">
+          <div class="panel-head panel-head-compact">
+            <div>
+              <p id="bottom-right-kicker" class="section-kicker"></p>
+              <h2 id="bottom-right-title"></h2>
+              <p id="bottom-right-description" class="helper helper-block"></p>
+            </div>
+          </div>
+          <div id="bottom-right-content" class="dashboard-card-grid"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
