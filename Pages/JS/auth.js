@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     syncSessionUi();
     // Redirect after a short delay
     setTimeout(() => {
-      window.location.href = "accueil.html";
+      window.location.href = "/";
     }, 1000);
   }
 });

@@ -2,10 +2,10 @@ const STORAGE_KEY = "ymmo-session";
 const HISTORY_PREFIX = "ymmo-history::";
 
 const ROLE_HOME_MAP = {
-  Client: "client.html",
-  Agent: "agent.html",
-  Manager: "manager.html",
-  "Admin IT": "admin.html",
+  Client: "/client",
+  Agent: "/agent",
+  Manager: "/manager",
+  "Admin IT": "/admin",
 };
 
 let currentProperties = [];
@@ -976,7 +976,7 @@ function clearSession() {
 function requireRoleSession(requiredRole) {
   const session = loadSession();
   if (!session) {
-    window.location.href = "connexion.html";
+    window.location.href = "/connexion";
     return null;
   }
 
@@ -989,7 +989,7 @@ function requireRoleSession(requiredRole) {
 }
 
 function getRoleHome(roleName) {
-  return ROLE_HOME_MAP[roleName] || "accueil.html";
+  return ROLE_HOME_MAP[roleName] || "/";
 }
 
 function redirectToRoleHome(roleName) {
@@ -1052,7 +1052,7 @@ function renderPropertyHighlights(properties, actionLabel) {
           <p>${escapeHtml(item.description || "Description a completer.")}</p>
           <div class="dashboard-card-footer">
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
-            <a class="inline-link" href="accueil.html#catalogue">${escapeHtml(actionLabel)}</a>
+            <a class="inline-link" href="/catalogue">${escapeHtml(actionLabel)}</a>
           </div>
         </article>
       `
@@ -1098,7 +1098,7 @@ function renderHistoryCards(items) {
           <h3>${escapeHtml(item.title || "Bien")}</h3>
           <p>${escapeHtml(item.city || "Ville non precise")} · ${formatPrice(item.price)}</p>
           <p>${escapeHtml(item.agency_name || "Agence Ymmo")}</p>
-          <a class="inline-link" href="accueil.html#catalogue">Revoir sur le catalogue</a>
+          <a class="inline-link" href="/catalogue">Revoir sur le catalogue</a>
         </article>
       `
     )
