@@ -20,17 +20,16 @@
       </a>
 
       <p class="section-kicker">Nouveau compte</p>
-      <h1>Creer un acces propre et reutilisable pour la soutenance.</h1>
+      <h1>Creer votre espace personnel Ymmo.</h1>
       <p class="section-copy">
-        Le formulaire ajoute un utilisateur en base SQLite, lui attribue un role
-        et stocke un mot de passe hache cote Python.
+        Votre compte vous permet de suivre vos demandes, retrouver les biens consultes
+        et echanger plus facilement avec nos agences.
       </p>
 
       <ul class="feature-list feature-list-plain">
-        <li>validation des champs</li>
-        <li>hachage PBKDF2 SHA-256</li>
-        <li>liaison utilisateur / role</li>
-        <li>session locale dans le navigateur</li>
+        <li>suivi de vos prises de contact</li>
+        <li>recommandations adaptees a votre recherche</li>
+        <li>espace personnel accessible a tout moment</li>
       </ul>
     </section>
 
@@ -40,6 +39,8 @@
       <p class="helper helper-block">Creation de compte en quelques champs.</p>
 
       <form id="register-form" class="stack-form" aria-label="Formulaire d'inscription">
+        <input type="hidden" name="role" value="Client">
+
         <div class="field-row">
           <div class="field">
             <label for="register_first_name">Prenom</label>
@@ -60,16 +61,6 @@
             <label for="register_phone">Telephone</label>
             <input id="register_phone" name="phone" type="tel" placeholder="06 11 22 33 44">
           </div>
-        </div>
-
-        <div class="field">
-          <label for="register_role">Profil</label>
-          <select id="register_role" name="role">
-            <option value="Client">Client</option>
-            <option value="Agent">Agent</option>
-            <option value="Manager">Manager</option>
-            <option value="Admin IT">Admin IT</option>
-          </select>
         </div>
 
         <div class="field">

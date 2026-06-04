@@ -55,19 +55,18 @@ function renderDashboard(data) {
 
   const networkSummary = document.getElementById("network-summary");
   if (networkSummary) {
-    const headOffice = sites.find((site) => site.site_type === "Siege");
     networkSummary.innerHTML = `
       <div class="mini-item">
         <strong>${escapeHtml(network.headquarters_city || "Aix-en-Provence")}</strong>
-        <span>siege et supervision centrale</span>
+        <span>siege et coordination nationale</span>
       </div>
       <div class="mini-item">
         <strong>${escapeHtml(String(network.agency_count || 0))} agences</strong>
         <span>diffusion nationale synchronisee</span>
       </div>
       <div class="mini-item">
-        <strong>${escapeHtml(String(network.total_workstations || 0))} postes relies</strong>
-        <span>${escapeHtml(headOffice ? headOffice.notes : "VPN IPSec et services partages")}</span>
+        <strong>${escapeHtml(String(network.total_workstations || 0))} conseillers equipes</strong>
+        <span>suivi client partage entre les agences</span>
       </div>
     `;
   }

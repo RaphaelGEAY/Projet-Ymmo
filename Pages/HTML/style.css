@@ -956,11 +956,6 @@ th {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-code {
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.9rem;
-}
-
 .footer {
   border-top: 1px solid var(--line);
   padding: 28px 0 40px;

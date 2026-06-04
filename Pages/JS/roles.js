@@ -108,7 +108,7 @@ function buildClientFrame({ session, dashboard, properties, requests, history })
     bottomLeft: {
       kicker: "Historique",
       title: "Derniers biens consultes",
-      description: "Cette liste est memorisee localement pour vous aider a reprendre facilement vos recherches.",
+      description: "Cette liste vous aide a reprendre facilement vos recherches.",
       html: renderHistoryCards(historyItems),
     },
     bottomRight: {
@@ -278,25 +278,25 @@ function buildAdminFrame({ session, dashboard }) {
       kicker: "Espace admin IT",
       title: `${session.first_name}, voici votre vue supervision et securite.`,
       description:
-        "L'espace admin IT isole les sujets infrastructure: sites connectes, services critiques, securite et routine de supervision.",
+        "L'espace admin IT regroupe les sujets de disponibilite, de continuite et de qualite de service.",
       badge: "Admin IT",
       kpis: [
         { value: String(sites.length), label: "sites supervises" },
-        { value: String(dashboard.network?.total_workstations || 0), label: "postes relies" },
-        { value: String(vpnActiveCount), label: "liaisons VPN actives" },
+        { value: String(dashboard.network?.total_workstations || 0), label: "collaborateurs equipes" },
+        { value: String(vpnActiveCount), label: "sites suivis" },
         { value: "24/7", label: "supervision cible" },
       ],
     },
     nav: ["Apercu", "Supervision", "Reseau", "Securite"],
     focus: {
       kicker: "Services critiques",
-      title: "Etat cible des briques techniques",
-      description: "Vision resumee des elements essentiels a la soutenance et au run quotidien.",
+      title: "Etat des services essentiels",
+      description: "Vision resumee des services qui soutiennent l'activite quotidienne du reseau.",
       html: renderServiceCards([
-        { name: "Web Ymmo", status: "Operationnel", detail: "Serveur web central accessible et catalogue servi en local." },
-        { name: "Base SQLite", status: "Operationnel", detail: "Donnees biens, utilisateurs et demandes disponibles." },
-        { name: "AD / GPO", status: "A presenter", detail: "Bloc prevu dans la partie infra et securisation du reseau." },
-        { name: "Sauvegardes", status: "Planifie", detail: "Rotation quotidienne et copie externalisee a formaliser dans la doc." },
+        { name: "Catalogue Ymmo", status: "Operationnel", detail: "Biens disponibles et demandes clients accessibles aux equipes." },
+        { name: "Donnees clients", status: "Operationnel", detail: "Informations de suivi disponibles pour les agences autorisees." },
+        { name: "Acces collaborateurs", status: "Operationnel", detail: "Droits adaptes aux responsabilites de chaque profil." },
+        { name: "Continuité d'activite", status: "Planifie", detail: "Procedures de reprise et sauvegardes suivies regulierement." },
       ]),
     },
     side: {
@@ -312,21 +312,21 @@ function buildAdminFrame({ session, dashboard }) {
       html: renderSiteRows(sites),
     },
     bottomRight: {
-      kicker: "Securite et runbook",
+      kicker: "Securite et continuite",
       title: "Checklist admin IT",
-      description: "Les points qui structurent bien la partie infra devant le jury.",
+      description: "Les points de controle qui garantissent un service stable pour les agences.",
       html: renderTimelineCards([
         {
           title: "Verifier la supervision",
-          body: "Surveiller connectivite des sites, charge des serveurs et disponibilite du service web.",
+          body: "Surveiller la disponibilite des sites, les acces et la qualite du service.",
         },
         {
           title: "Controler les sauvegardes",
-          body: "Confirmer l'execution quotidienne et documenter le chemin de restauration.",
+          body: "Confirmer l'execution quotidienne et garder une procedure de restauration claire.",
         },
         {
           title: "Revoir les acces",
-          body: "Valider la matrice des droits, les groupes AD et la coherences des profils a presenter.",
+          body: "Valider les droits et la coherence des profils collaborateurs.",
         },
         {
           title: "Preparer le PRA",

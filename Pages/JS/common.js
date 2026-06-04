@@ -100,7 +100,7 @@ async function apiRequest(url, options = {}) {
   const data = rawText ? JSON.parse(rawText) : {};
 
   if (!response.ok) {
-    throw new Error(data.error || `Erreur serveur (${response.status})`);
+    throw new Error(data.error || `Erreur de service (${response.status})`);
   }
 
   return data;
@@ -226,7 +226,7 @@ function renderRequestList(items, emptyMessage) {
 
 function renderHistoryCards(items) {
   if (!items.length) {
-    return renderEmptyState("Aucun historique local pour le moment.");
+    return renderEmptyState("Aucun historique pour le moment.");
   }
 
   return items
@@ -325,9 +325,9 @@ function renderSiteRows(items) {
             <span class="status-pill">${escapeHtml(item.site_type)}</span>
           </div>
           <p>${escapeHtml(item.city)} · ${escapeHtml(item.region || "Région")}</p>
-          <p>${escapeHtml(String(item.workstations_count))} postes · ${escapeHtml(String(item.printers_count))} imprimante(s)</p>
+          <p>${escapeHtml(String(item.workstations_count))} conseillers equipes</p>
           <div class="request-meta">
-            <span>${escapeHtml(item.notes || "VPN IPSec et services centralisés.")}</span>
+            <span>Suivi client partage avec le reseau Ymmo.</span>
           </div>
         </article>
       `
@@ -364,8 +364,8 @@ function renderNetworkCards(items) {
         <article class="network-card">
           <strong>${escapeHtml(item.name)}</strong>
           <p>${escapeHtml(item.city)} · ${escapeHtml(item.region || "Région")}</p>
-          <p>${escapeHtml(item.site_type)} · ${escapeHtml(String(item.workstations_count))} postes · ${escapeHtml(String(item.printers_count))} imprimante(s)</p>
-          <p>${escapeHtml(item.notes || "VPN IPSec, DNS/DHCP et supervision centralisée.")}</p>
+          <p>${escapeHtml(item.site_type)} · ${escapeHtml(String(item.workstations_count))} conseillers equipes</p>
+          <p>Accompagnement achat, vente et estimation avec un suivi client partage.</p>
         </article>
       `
     )
