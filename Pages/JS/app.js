@@ -1341,7 +1341,7 @@ function getPropertyClass(type) {
     return "property-visual--appartement";
   }
 
-  if (normalized.includes("local-professionnel")) {
+  if (normalized.includes("local-professionnel") || normalized.includes("pro")) {
     return "property-visual--local-professionnel";
   }
 

@@ -17,6 +17,7 @@ function syncSessionUi() {
   const registerLink = document.getElementById("register-link");
   const logoutLink = document.getElementById("logout-link");
   const spaceLink = document.getElementById("space-link");
+  const spaceNavLink = ensureSpaceNavLink();
 
   if (sessionText) {
     sessionText.textContent = session
@@ -37,13 +38,19 @@ function syncSessionUi() {
   }
 
   if (spaceLink) {
+    spaceLink.classList.add("hidden");
+  }
+
+  if (spaceNavLink) {
     if (session) {
-      spaceLink.classList.remove("hidden");
-      spaceLink.href = getRoleHome(session.role_name);
+      spaceNavLink.classList.remove("hidden");
+      spaceNavLink.href = getRoleHome(session.role_name);
     } else {
-      spaceLink.classList.add("hidden");
+      spaceNavLink.classList.add("hidden");
     }
   }
+
+  markActiveNavigation();
 }
 
 function saveSession(user) {
@@ -83,6 +90,34 @@ function getRoleHome(roleName) {
 
 function redirectToRoleHome(roleName) {
   window.location.href = getRoleHome(roleName);
+}
+
+function ensureSpaceNavLink() {
+  const topnav = document.querySelector(".topnav");
+  if (!topnav) {
+    return null;
+  }
+
+  let link = document.getElementById("space-nav-link");
+  if (!link) {
+    link = document.createElement("a");
+    link.id = "space-nav-link";
+    link.textContent = "Mon espace";
+    link.className = "hidden";
+    topnav.appendChild(link);
+  }
+
+  return link;
+}
+
+function markActiveNavigation() {
+  const currentPath = window.location.pathname || "/";
+  document.querySelectorAll(".topnav a").forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    const normalizedHref = href === "/" ? "/" : href.replace(/\/$/, "");
+    const normalizedPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
+    link.classList.toggle("is-active", normalizedHref === normalizedPath);
+  });
 }
 
 // === API Requests ===
@@ -179,9 +214,13 @@ function renderPropertyHighlights(properties, actionLabel) {
   }
 
   return properties
-    .map(
-      (item) => `
+    .map((item) => {
+      const imageUrl = getPropertyImageUrl(item);
+      return `
         <article class="dashboard-card">
+          <div class="dashboard-card-media">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(getPropertyImageAlt(item))}" loading="lazy">
+          </div>
           <div class="dashboard-card-top">
             <span class="badge type">${escapeHtml(item.type || "Bien")}</span>
             <strong>${formatPrice(item.price)}</strong>
@@ -195,7 +234,7 @@ function renderPropertyHighlights(properties, actionLabel) {
           </div>
         </article>
       `
-    )
+    })
     .join("");
 }
 
@@ -230,9 +269,13 @@ function renderHistoryCards(items) {
   }
 
   return items
-    .map(
-      (item) => `
+    .map((item) => {
+      const imageUrl = getPropertyImageUrl(item);
+      return `
         <article class="dashboard-card dashboard-card-compact">
+          <div class="dashboard-card-media dashboard-card-media-compact">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(getPropertyImageAlt(item))}" loading="lazy">
+          </div>
           <span class="badge type">${escapeHtml(item.type || "Bien")}</span>
           <h3>${escapeHtml(item.title || "Bien")}</h3>
           <p>${escapeHtml(item.city || "Ville non précisée")} · ${formatPrice(item.price)}</p>
@@ -240,7 +283,7 @@ function renderHistoryCards(items) {
           <a class="inline-link" href="/catalogue">Revoir sur le catalogue</a>
         </article>
       `
-    )
+    })
     .join("");
 }
 
@@ -384,7 +427,41 @@ function toHistoryItem(property) {
     price: property.price,
     type: property.type,
     agency_name: property.agency_name,
+    primary_media_url: property.primary_media_url || "",
   };
+}
+
+function getPropertyImageUrl(property) {
+  const mediaUrl = String(property?.primary_media_url || "").trim();
+  if (mediaUrl) {
+    return mediaUrl;
+  }
+
+  const normalizedType = normalizePropertyType(property?.type);
+  if (normalizedType.includes("maison")) {
+    return "/IMG/property-house.svg";
+  }
+
+  if (normalizedType.includes("local-professionnel")) {
+    return "/IMG/property-office.svg";
+  }
+
+  return "/IMG/property-apartment.svg";
+}
+
+function getPropertyImageAlt(property) {
+  const type = property?.type || "Bien";
+  const title = property?.title || "Ymmo";
+  const city = property?.city || "France";
+  return `${type} ${title} a ${city}`;
+}
+
+function normalizePropertyType(type) {
+  return String(type || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
 }
 
 // === DOM Utilities ===
@@ -458,11 +535,7 @@ function formatDateTime(rawDate) {
 }
 
 function getPropertyClass(type) {
-  const normalized = String(type || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "-");
+  const normalized = normalizePropertyType(type);
 
   if (normalized.includes("maison")) {
     return "property-visual--maison";
@@ -472,7 +545,7 @@ function getPropertyClass(type) {
     return "property-visual--appartement";
   }
 
-  if (normalized.includes("local-professionnel")) {
+  if (normalized.includes("local-professionnel") || normalized.includes("pro")) {
     return "property-visual--local-professionnel";
   }
 

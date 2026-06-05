@@ -135,7 +135,8 @@ textarea {
 }
 
 .topnav a:hover,
-.topnav a:focus-visible {
+.topnav a:focus-visible,
+.topnav a.is-active {
   color: var(--ink);
   border-bottom-color: var(--green);
 }
@@ -543,6 +544,7 @@ a:focus-visible {
   border-radius: var(--radius);
   background: var(--surface);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .property-card:hover,
@@ -566,18 +568,30 @@ a:focus-visible {
   justify-content: space-between;
   color: #fff;
   background: linear-gradient(135deg, #355a73, #17374d);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .property-visual--maison {
-  background: linear-gradient(135deg, #7a4e2f, #c27b38);
+  background: linear-gradient(135deg, rgba(122, 78, 47, 0.85), rgba(194, 123, 56, 0.85)), 
+              url('IMG/property-house.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .property-visual--appartement {
-  background: linear-gradient(135deg, #2f5a6d, #4b8796);
+  background: linear-gradient(135deg, rgba(47, 90, 109, 0.85), rgba(75, 135, 150, 0.85)), 
+              url('IMG/property-apartment.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .property-visual--local-professionnel {
-  background: linear-gradient(135deg, #30455e, #617b96);
+  background: linear-gradient(135deg, rgba(48, 69, 94, 0.85), rgba(97, 123, 150, 0.85)), 
+              url('IMG/property-office.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .property-visual span {
@@ -669,18 +683,30 @@ a:focus-visible {
   flex-direction: column;
   justify-content: end;
   gap: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .selected-visual--maison {
-  background: linear-gradient(135deg, #7a4e2f, #bf7d3e);
+  background: linear-gradient(135deg, rgba(122, 78, 47, 0.88), rgba(191, 125, 62, 0.88)), 
+              url('IMG/property-house.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .selected-visual--appartement {
-  background: linear-gradient(135deg, #2d5d72, #48879b);
+  background: linear-gradient(135deg, rgba(45, 93, 114, 0.88), rgba(72, 135, 155, 0.88)), 
+              url('IMG/property-apartment.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .selected-visual--local-professionnel {
-  background: linear-gradient(135deg, #30455e, #617b96);
+  background: linear-gradient(135deg, rgba(48, 69, 94, 0.88), rgba(97, 123, 150, 0.88)), 
+              url('IMG/property-office.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .selected-visual--default {
@@ -954,6 +980,202 @@ th {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.09);
   border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* === Property Detail Page Styles === */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-image-section {
+  display: grid;
+  gap: 16px;
+}
+
+.property-image {
+  min-height: 340px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #355a73, #17374d);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-image--maison {
+  background: linear-gradient(135deg, rgba(122, 78, 47, 0.85), rgba(194, 123, 56, 0.85)), 
+              url('../IMG/property-house.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.property-image--appartement {
+  background: linear-gradient(135deg, rgba(47, 90, 109, 0.85), rgba(75, 135, 150, 0.85)), 
+              url('../IMG/property-apartment.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.property-image--local-professionnel {
+  background: linear-gradient(135deg, rgba(48, 69, 94, 0.85), rgba(97, 123, 150, 0.85)), 
+              url('../IMG/property-office.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.image-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.image-overlay strong {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.image-overlay p {
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.image-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.detail-content {
+  display: grid;
+  gap: 28px;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.detail-header > div {
+  display: flex;
+  gap: 8px;
+}
+
+.detail-title-section {
+  display: grid;
+  gap: 8px;
+}
+
+.detail-title-section h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.detail-price-section {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+}
+
+.price-large {
+  font-size: 1.8rem;
+  color: var(--green);
+}
+
+.detail-description,
+.detail-specs {
+  display: grid;
+  gap: 12px;
+}
+
+.detail-description h2,
+.detail-specs h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.detail-description p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spec-item {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+}
+
+.spec-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.spec-item strong {
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detail-feedback {
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+.detail-feedback.feedback-success {
+  background: #e7f5ea;
+  color: var(--success);
+}
+
+.detail-feedback.feedback-error {
+  background: #ffe7e0;
+  color: var(--danger);
 }
 
 .footer {

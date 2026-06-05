@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Détails du bien - Ymmo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="common.js" defer></script>
+  <script src="detail-bien.js" defer></script>
+</head>
+<body data-page="property-detail">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brand" href="/">
+        <span class="brand-mark">Y</span>
+        <span>
+          <strong>Ymmo</strong>
+          <small>plateforme immobiliere centralisee</small>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Navigation principale">
+        <a href="/catalogue">Catalogue</a>
+        <a href="/donnees">Tendances</a>
+        <a href="/infra">Reseau</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <div class="session-actions">
+        <span id="session-text" class="session-text">Visiteur</span>
+        <a id="space-link" class="btn soft hidden" href="/client">Mon espace</a>
+        <a id="login-link" class="btn soft" href="/connexion">Connexion</a>
+        <a id="register-link" class="btn primary" href="/inscription">Inscription</a>
+        <a id="logout-link" class="btn ghost hidden" href="/deconnexion">Deconnexion</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="band">
+      <div class="container detail-grid">
+        <!-- Image section -->
+        <div class="detail-image-section">
+          <div id="property-image" class="property-image"></div>
+          <div class="image-actions">
+            <button id="upload-image-button" class="btn soft hidden" type="button">Modifier l'image</button>
+            <input id="image-input" type="file" accept="image/*" style="display: none;">
+          </div>
+        </div>
+
+        <!-- Content section -->
+        <div class="detail-content">
+          <div class="detail-header">
+            <div>
+              <span id="property-type-badge" class="badge type">Bien</span>
+              <span id="property-status-badge" class="badge status-available">Disponible</span>
+            </div>
+            <a href="/catalogue" class="btn ghost">Retour au catalogue</a>
+          </div>
+
+          <div class="detail-title-section">
+            <h1 id="property-title">Chargement...</h1>
+            <p id="property-location" class="section-copy">Chargement des informations...</p>
+          </div>
+
+          <div class="detail-price-section">
+            <strong id="property-price" class="price-large">--</strong>
+            <p id="property-agency" class="helper">Ymmo</p>
+          </div>
+
+          <div class="detail-description">
+            <h2>À propos de ce bien</h2>
+            <p id="property-description">Description à completer.</p>
+          </div>
+
+          <div class="detail-specs">
+            <h2>Caractéristiques</h2>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Pièces</span>
+                <strong id="property-rooms">--</strong>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Surface</span>
+                <strong id="property-surface">--</strong>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">DPE</span>
+                <strong id="property-energy">--</strong>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Intérêt acheteur</span>
+                <strong id="property-interest">--</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button id="contact-button" class="btn primary" type="button">Contacter une agence</button>
+            <button id="edit-button" class="btn soft hidden" type="button">Modifier ce bien</button>
+          </div>
+
+          <div id="detail-feedback" class="helper hidden" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Ymmo Groupe Immobilier</strong>
+        <p>Conseil immobilier, estimation, vente et accompagnement sur mesure.</p>
+      </div>
+      <p>Siege a Aix-en-Provence, reseau national d'agences et suivi client centralise.</p>
+    </div>
+  </footer>
+</body>
+</html>

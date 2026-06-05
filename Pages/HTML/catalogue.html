@@ -84,17 +84,6 @@
               <button id="reset-filters" class="btn ghost" type="button">Effacer</button>
             </div>
           </form>
-
-          <div class="quick-picks">
-            <p class="helper-title">Acces rapide</p>
-            <div class="chip-row">
-              <button class="chip-button" type="button" data-filter-city="Rennes">Rennes</button>
-              <button class="chip-button" type="button" data-filter-city="Lyon">Lyon</button>
-              <button class="chip-button" type="button" data-filter-type="Maison">Maisons</button>
-              <button class="chip-button" type="button" data-filter-type="Appartement">Appartements</button>
-              <button class="chip-button" type="button" data-filter-status="Disponible">Disponibles</button>
-            </div>
-          </div>
         </aside>
 
         <section class="results-column" aria-labelledby="results-title">
@@ -112,47 +101,6 @@
           <p id="offers-state" class="helper" aria-live="polite">Chargement des offres...</p>
           <div id="offers-grid" class="property-grid" aria-live="polite"></div>
         </section>
-
-        <aside class="tool-surface detail-surface">
-          <div class="panel-head panel-head-compact">
-            <div>
-              <p class="section-kicker">Selection</p>
-              <h2>Fiche rapide</h2>
-            </div>
-          </div>
-
-          <div id="selected-visual" class="selected-visual selected-visual--default">
-            <span id="selected-type-badge" class="visual-badge">Bien</span>
-            <strong id="selected-title">Choisissez un bien</strong>
-            <p id="selected-location">La fiche detaillee apparaitra ici.</p>
-          </div>
-
-          <div class="selected-content">
-            <div class="selected-row">
-              <span>Prix</span>
-              <strong id="selected-price">Prix sur demande</strong>
-            </div>
-            <div class="selected-row">
-              <span>Agence</span>
-              <strong id="selected-agency">Ymmo</strong>
-            </div>
-            <div class="selected-row">
-              <span>Etat</span>
-              <strong id="selected-status">Non selectionne</strong>
-            </div>
-
-            <p id="selected-description" class="helper helper-block">
-              Selectionnez un bien depuis la liste pour afficher sa synthese, ses indicateurs
-              et preparer une demande de visite.
-            </p>
-
-            <div id="selected-metrics" class="metric-chip-list"></div>
-
-            <div class="button-row">
-              <button id="selected-contact-button" class="btn primary" type="button">Preparer une demande</button>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
   </main>
