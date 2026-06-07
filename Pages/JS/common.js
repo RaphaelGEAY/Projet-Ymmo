@@ -212,7 +212,6 @@ function renderPropertyHighlights(properties, actionLabel) {
           <p>${escapeHtml(item.description || "Description à compléter.")}</p>
           <div class="dashboard-card-footer">
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
-            <span class="inline-link">${escapeHtml(actionLabel)}</span>
           </div>
         ${cardClose}
       `
