@@ -17,7 +17,6 @@ function syncSessionUi() {
   const registerLink = document.getElementById("register-link");
   const logoutLink = document.getElementById("logout-link");
   const spaceLink = document.getElementById("space-link");
-  const spaceNavLink = ensureSpaceNavLink();
 
   if (sessionText) {
     sessionText.textContent = session
@@ -38,15 +37,11 @@ function syncSessionUi() {
   }
 
   if (spaceLink) {
-    spaceLink.classList.add("hidden");
-  }
-
-  if (spaceNavLink) {
     if (session) {
-      spaceNavLink.classList.remove("hidden");
-      spaceNavLink.href = getRoleHome(session.role_name);
+      spaceLink.classList.remove("hidden");
+      spaceLink.href = getRoleHome(session.role_name);
     } else {
-      spaceNavLink.classList.add("hidden");
+      spaceLink.classList.add("hidden");
     }
   }
 
@@ -90,24 +85,6 @@ function getRoleHome(roleName) {
 
 function redirectToRoleHome(roleName) {
   window.location.href = getRoleHome(roleName);
-}
-
-function ensureSpaceNavLink() {
-  const topnav = document.querySelector(".topnav");
-  if (!topnav) {
-    return null;
-  }
-
-  let link = document.getElementById("space-nav-link");
-  if (!link) {
-    link = document.createElement("a");
-    link.id = "space-nav-link";
-    link.textContent = "Mon espace";
-    link.className = "hidden";
-    topnav.appendChild(link);
-  }
-
-  return link;
 }
 
 function markActiveNavigation() {
@@ -216,8 +193,13 @@ function renderPropertyHighlights(properties, actionLabel) {
   return properties
     .map((item) => {
       const imageUrl = getPropertyImageUrl(item);
+      const detailHref = item.id != null ? `/detail-bien?id=${encodeURIComponent(String(item.id))}` : null;
+      const cardOpen = detailHref
+        ? `<a class="dashboard-card dashboard-card-link" href="${detailHref}">`
+        : `<article class="dashboard-card">`;
+      const cardClose = detailHref ? `</a>` : `</article>`;
       return `
-        <article class="dashboard-card">
+        ${cardOpen}
           <div class="dashboard-card-media">
             <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(getPropertyImageAlt(item))}" loading="lazy">
           </div>
@@ -230,9 +212,9 @@ function renderPropertyHighlights(properties, actionLabel) {
           <p>${escapeHtml(item.description || "Description à compléter.")}</p>
           <div class="dashboard-card-footer">
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
-            <a class="inline-link" href="/catalogue">${escapeHtml(actionLabel)}</a>
+            <span class="inline-link">${escapeHtml(actionLabel)}</span>
           </div>
-        </article>
+        ${cardClose}
       `
     })
     .join("");
@@ -246,7 +228,11 @@ function renderRequestList(items, emptyMessage) {
   return items
     .map(
       (item) => `
-        <article class="request-item">
+        ${
+          item.property_id != null
+            ? `<a class="request-item request-item-link" href="/detail-bien?id=${encodeURIComponent(String(item.property_id))}">`
+            : `<article class="request-item">`
+        }
           <div class="request-top">
             <strong>${escapeHtml(item.full_name || "Contact")}</strong>
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
@@ -257,7 +243,7 @@ function renderRequestList(items, emptyMessage) {
             <span>${escapeHtml(item.email || "")}</span>
             <span>${escapeHtml(formatDateTime(item.created_at))}</span>
           </div>
-        </article>
+        ${item.property_id != null ? `</a>` : `</article>`}
       `
     )
     .join("");
@@ -431,8 +417,12 @@ function toHistoryItem(property) {
   };
 }
 
+function getPropertyMediaUrl(property) {
+  return String(property?.primary_media_url || "").trim();
+}
+
 function getPropertyImageUrl(property) {
-  const mediaUrl = String(property?.primary_media_url || "").trim();
+  const mediaUrl = getPropertyMediaUrl(property);
   if (mediaUrl) {
     return mediaUrl;
   }

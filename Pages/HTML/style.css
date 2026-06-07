@@ -374,7 +374,7 @@ h3 {
 
 .workspace-grid {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr) 320px;
+  grid-template-columns: 300px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -532,7 +532,7 @@ a:focus-visible {
 
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 18px;
 }
 
@@ -962,6 +962,10 @@ th {
   text-align: center;
 }
 
+.auth-panel-center .button-row {
+  justify-content: center;
+}
+
 .inline-link {
   color: var(--green);
   font-weight: 600;
@@ -1013,6 +1017,7 @@ th {
   color: #fff;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -1322,6 +1327,33 @@ th {
 
 .dashboard-card-compact {
   min-height: 100%;
+}
+
+.dashboard-card-link,
+.request-item-link {
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.request-item-link {
+  display: grid;
+  gap: 8px;
+}
+
+.dashboard-card-link:hover,
+.dashboard-card-link:focus-visible,
+.request-item-link:hover,
+.request-item-link:focus-visible {
+  border-color: #b8c9be;
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.dashboard-card-link:focus-visible,
+.request-item-link:focus-visible {
+  outline: 2px solid rgba(23, 105, 85, 0.18);
+  outline-offset: 2px;
 }
 
 .request-list {

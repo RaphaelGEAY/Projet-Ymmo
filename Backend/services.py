@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import base64
+import mimetypes
 from typing import Any
 
 from Backend.repositories import (
@@ -109,6 +111,7 @@ class MarketService:
 
     def list_properties(self, raw_filters: dict[str, Any]) -> dict[str, Any]:
         filters = PropertyFilters(
+            property_id=self._to_int(raw_filters.get("id")),
             city=(raw_filters.get("city") or "").strip() or None,
             property_type=(raw_filters.get("type") or "").strip() or None,
             max_price=self._to_int(raw_filters.get("max_price")),
@@ -116,6 +119,73 @@ class MarketService:
         )
         items = self.property_repository.search(filters)
         return {"items": items, "count": len(items)}
+
+    def update_property(self, property_id: int, payload: dict[str, Any]) -> dict[str, Any]:
+        current_property = self.property_repository.get_by_id(property_id)
+        if current_property is None:
+            raise ValidationError("Bien non trouvé.")
+
+        title = None
+        if "title" in payload:
+            title = self._required_text(payload, "title")
+
+        description = None
+        if "description" in payload:
+            raw_description = str(payload.get("description") or "").strip()
+            description = raw_description or None
+
+        if title is None and description is None:
+            raise ValidationError("Aucune modification fournie.")
+
+        updated = self.property_repository.update(
+            property_id,
+            title=title,
+            description=description,
+        )
+        if updated is None:
+            raise ValidationError("Bien non trouvé.")
+
+        return {"property": updated}
+
+    def upload_property_image(
+        self,
+        property_id: int,
+        *,
+        file_name: str,
+        mime_type: str,
+        data: bytes,
+    ) -> dict[str, Any]:
+        property_row = self.property_repository.get_by_id(property_id)
+        if property_row is None:
+            raise ValidationError("Bien non trouvé.")
+
+        guessed_mime_type = (mimetypes.guess_type(file_name)[0] or "").strip().lower()
+        resolved_mime_type = (mime_type or guessed_mime_type or "").strip().lower()
+        if not resolved_mime_type.startswith("image/") and guessed_mime_type.startswith("image/"):
+            resolved_mime_type = guessed_mime_type
+
+        if not resolved_mime_type.startswith("image/"):
+            raise ValidationError("Le fichier doit être une image.")
+
+        if not data:
+            raise ValidationError("Le fichier image est vide.")
+
+        data_url = f"data:{resolved_mime_type};base64,{base64.b64encode(data).decode('ascii')}"
+        alt_text = (
+            f"{property_row.get('type') or 'Bien'} "
+            f"{property_row.get('title') or 'sans titre'} "
+            f"a {property_row.get('city') or 'ville inconnue'}"
+        )
+
+        updated = self.property_repository.set_primary_media(
+            property_id,
+            data_url,
+            alt_text=alt_text,
+        )
+        if updated is None:
+            raise ValidationError("Bien non trouvé.")
+
+        return {"property": updated}
 
     def get_dashboard(self) -> dict[str, Any]:
         overview = self.property_repository.get_market_overview()

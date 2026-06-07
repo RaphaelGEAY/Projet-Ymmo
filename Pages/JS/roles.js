@@ -97,7 +97,7 @@ function buildClientFrame({ session, dashboard, properties, requests, history })
       kicker: "Selection client",
       title: "Biens recommandes pour continuer votre recherche",
       description: "Ces biens cumulent une bonne dynamique de marche et une forte attractivite.",
-      html: renderPropertyHighlights(recommended, "Ouvrir le catalogue"),
+      html: renderPropertyHighlights(recommended, "Voir le bien"),
     },
     side: {
       kicker: "Demandes",

@@ -15,10 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "logout") {
     clearSession();
     syncSessionUi();
-    // Redirect after a short delay
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 1000);
   }
 });
 

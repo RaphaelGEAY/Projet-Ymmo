@@ -259,6 +259,10 @@ function renderProperties(items) {
       const statusClass = item.status === "Disponible" ? "status-available" : "status-pending";
       const propertyClass = getPropertyClass(item.type);
       const isSelected = item.id === selectedPropertyId;
+      const mediaUrl = getPropertyMediaUrl(item);
+      const visualStyle = mediaUrl
+        ? ` style="background-image: linear-gradient(135deg, rgba(20, 32, 25, 0.18), rgba(20, 32, 25, 0.45)), url('${escapeHtml(mediaUrl)}');"`
+        : "";
       const details = [
         item.rooms ? `${item.rooms} pieces` : null,
         item.surface_m2 ? `${item.surface_m2} m2` : null,
@@ -278,7 +282,7 @@ function renderProperties(items) {
 
       return `
         <article class="property-card ${isSelected ? "is-selected" : ""}">
-          <div class="property-visual ${propertyClass}">
+          <div class="property-visual ${propertyClass}"${visualStyle}>
             <span>${escapeHtml(item.city || "Ville")}</span>
             <strong>${escapeHtml(item.title || "Bien sans titre")}</strong>
           </div>
@@ -443,6 +447,7 @@ function renderSelectedProperty(property) {
 
   if (!property) {
     visual.className = "selected-visual selected-visual--default";
+    visual.style.removeProperty("background-image");
     typeBadge.textContent = "Bien";
     title.textContent = "Choisissez un bien";
     location.textContent = "La fiche detaillee apparaitra ici.";
@@ -460,6 +465,12 @@ function renderSelectedProperty(property) {
   }
 
   visual.className = `selected-visual ${getPropertyClass(property.type).replace("property-visual", "selected-visual")}`;
+  const mediaUrl = getPropertyMediaUrl(property);
+  if (mediaUrl) {
+    visual.style.backgroundImage = `linear-gradient(135deg, rgba(20, 32, 25, 0.18), rgba(20, 32, 25, 0.45)), url('${mediaUrl.replace(/'/g, "\\'")}')`;
+  } else {
+    visual.style.removeProperty("background-image");
+  }
   typeBadge.textContent = property.type || "Bien";
   title.textContent = property.title || "Bien sans titre";
   location.textContent = `${property.city || "Ville inconnue"} · ${property.reference || ""}`;
@@ -601,7 +612,7 @@ function buildClientFrame({ session, dashboard, properties, requests, history })
       kicker: "Selection client",
       title: "Biens recommandes pour continuer votre recherche",
       description: "Ces biens cumulent une bonne dynamique de marche et une forte attractivite.",
-      html: renderPropertyHighlights(recommended, "Ouvrir le catalogue"),
+      html: renderPropertyHighlights(recommended, "Voir le bien"),
     },
     side: {
       kicker: "Demandes",
@@ -1041,7 +1052,11 @@ function renderPropertyHighlights(properties, actionLabel) {
   return properties
     .map(
       (item) => `
-        <article class="dashboard-card">
+        ${
+          item.id != null
+            ? `<a class="dashboard-card dashboard-card-link" href="/detail-bien?id=${encodeURIComponent(String(item.id))}">`
+            : `<article class="dashboard-card">`
+        }
           <div class="dashboard-card-top">
             <span class="badge type">${escapeHtml(item.type || "Bien")}</span>
             <strong>${formatPrice(item.price)}</strong>
@@ -1051,9 +1066,9 @@ function renderPropertyHighlights(properties, actionLabel) {
           <p>${escapeHtml(item.description || "Description a completer.")}</p>
           <div class="dashboard-card-footer">
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
-            <a class="inline-link" href="/catalogue">${escapeHtml(actionLabel)}</a>
+            <span class="inline-link">${escapeHtml(actionLabel)}</span>
           </div>
-        </article>
+        ${item.id != null ? `</a>` : `</article>`}
       `
     )
     .join("");
@@ -1067,7 +1082,11 @@ function renderRequestList(items, emptyMessage) {
   return items
     .map(
       (item) => `
-        <article class="request-item">
+        ${
+          item.property_id != null
+            ? `<a class="request-item request-item-link" href="/detail-bien?id=${encodeURIComponent(String(item.property_id))}">`
+            : `<article class="request-item">`
+        }
           <div class="request-top">
             <strong>${escapeHtml(item.full_name || "Contact")}</strong>
             <span class="status-pill ${getStatusClass(item.status)}">${escapeHtml(item.status || "Inconnu")}</span>
@@ -1078,7 +1097,7 @@ function renderRequestList(items, emptyMessage) {
             <span>${escapeHtml(item.email || "")}</span>
             <span>${escapeHtml(formatDateTime(item.created_at))}</span>
           </div>
-        </article>
+        ${item.property_id != null ? `</a>` : `</article>`}
       `
     )
     .join("");

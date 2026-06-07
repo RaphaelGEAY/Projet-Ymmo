@@ -8,6 +8,7 @@ from Backend.database import Database
 
 @dataclass(slots=True)
 class PropertyFilters:
+    property_id: int | None = None
     city: str | None = None
     property_type: str | None = None
     max_price: int | None = None
@@ -111,6 +112,10 @@ class PropertyRepository:
         clauses = []
         params: list[Any] = []
 
+        if filters.property_id is not None:
+            clauses.append("p.id = ?")
+            params.append(filters.property_id)
+
         if filters.city:
             clauses.append("lower(p.city) LIKE ?")
             params.append(f"%{filters.city.lower()}%")
@@ -175,6 +180,77 @@ class PropertyRepository:
         with self.database.connect() as connection:
             rows = connection.execute(query, params).fetchall()
         return [dict(row) for row in rows]
+
+    def get_by_id(self, property_id: int) -> dict[str, Any] | None:
+        rows = self.search(PropertyFilters(property_id=property_id))
+        return rows[0] if rows else None
+
+    def update(
+        self,
+        property_id: int,
+        *,
+        title: str | None = None,
+        description: str | None = None,
+    ) -> dict[str, Any] | None:
+        assignments: list[str] = []
+        params: list[Any] = []
+
+        if title is not None:
+            assignments.append("title = ?")
+            params.append(title)
+
+        if description is not None:
+            assignments.append("description = ?")
+            params.append(description)
+
+        if not assignments:
+            return self.get_by_id(property_id)
+
+        assignments.append("updated_at = CURRENT_TIMESTAMP")
+        params.append(property_id)
+
+        query = f"""
+            UPDATE properties
+            SET {", ".join(assignments)}
+            WHERE id = ?
+        """
+
+        with self.database.connect() as connection:
+            cursor = connection.execute(query, params)
+            if cursor.rowcount == 0:
+                return None
+
+        return self.get_by_id(property_id)
+
+    def set_primary_media(
+        self,
+        property_id: int,
+        url: str,
+        *,
+        alt_text: str | None = None,
+    ) -> dict[str, Any] | None:
+        with self.database.connect() as connection:
+            connection.execute(
+                """
+                    DELETE FROM property_media
+                    WHERE property_id = ? AND is_primary = 1
+                """,
+                (property_id,),
+            )
+            connection.execute(
+                """
+                    INSERT OR REPLACE INTO property_media (
+                        property_id,
+                        url,
+                        alt_text,
+                        is_primary
+                    )
+                    VALUES (?, ?, ?, 1)
+                """,
+                (property_id, url, alt_text),
+            )
+
+        return self.get_by_id(property_id)
 
     def get_market_overview(self) -> dict[str, Any]:
         with self.database.connect() as connection:

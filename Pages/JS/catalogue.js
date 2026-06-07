@@ -94,6 +94,10 @@ function renderProperties(items) {
     .map((item) => {
       const statusClass = item.status === "Disponible" ? "status-available" : "status-pending";
       const propertyClass = getPropertyClass(item.type);
+      const mediaUrl = getPropertyMediaUrl(item);
+      const visualStyle = mediaUrl
+        ? ` style="background-image: linear-gradient(135deg, rgba(20, 32, 25, 0.18), rgba(20, 32, 25, 0.45)), url('${escapeHtml(mediaUrl)}');"`
+        : "";
       const details = [
         item.rooms ? `${item.rooms} pieces` : null,
         item.surface_m2 ? `${item.surface_m2} m2` : null,
@@ -113,7 +117,7 @@ function renderProperties(items) {
 
       return `
         <article class="property-card" data-property-id="${item.id}">
-          <div class="property-visual ${propertyClass}">
+          <div class="property-visual ${propertyClass}"${visualStyle}>
             <span>${escapeHtml(item.city || "Ville")}</span>
             <strong>${escapeHtml(item.title || "Bien sans titre")}</strong>
           </div>

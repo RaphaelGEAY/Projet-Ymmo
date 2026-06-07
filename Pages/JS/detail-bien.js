@@ -105,6 +105,12 @@ function renderPropertyImage(property) {
 
   const propertyClass = getPropertyClass(property.type);
   imageElement.className = `property-image ${propertyClass.replace("property-visual", "selected-visual")}`;
+  const mediaUrl = getPropertyMediaUrl(property);
+  if (mediaUrl) {
+    imageElement.style.backgroundImage = `linear-gradient(135deg, rgba(20, 32, 25, 0.18), rgba(20, 32, 25, 0.45)), url('${mediaUrl.replace(/'/g, "\\'")}')`;
+  } else {
+    imageElement.style.removeProperty("background-image");
+  }
   imageElement.innerHTML = `
     <div class="image-overlay">
       <strong>${escapeHtml(property.title || "Bien")}</strong>
@@ -173,6 +179,9 @@ async function uploadPropertyImage(propertyId, file) {
     setFeedback(feedback, "Image mise à jour avec succès.", "success");
     // Refresh property data to show new image
     await loadPropertyDetail(propertyId);
+    if (document.getElementById("image-input")) {
+      document.getElementById("image-input").value = "";
+    }
   } catch (error) {
     const feedback = document.getElementById("detail-feedback");
     setFeedback(feedback, error.message, "error");
