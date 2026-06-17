@@ -1,6 +1,6 @@
 # Ymmo - Projet B2 INFRA & DEV
 
-Prototype full-stack en `HTML/CSS/JavaScript + Python + SQLite` pour une plateforme immobilière centralisée.
+Prototype full-stack en `HTML/CSS/JavaScript + Python + SQLite` pour une plateforme immobilière centralisée.  
 Infrastructure réseau complète sous `Windows Server`.
 
 ## Fonctionnalités incluses
